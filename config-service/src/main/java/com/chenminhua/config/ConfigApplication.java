@@ -4,6 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.config.server.EnableConfigServer;
 
+/**
+ * 访问 http://localhost:8888/reservation/master
+ */
+
 @EnableConfigServer
 @SpringBootApplication
 public class ConfigApplication {

@@ -12,6 +12,8 @@
 
         <module>reservation</module>
         <module>config-service</module>
+        <module>eureka-service</module>
+        <module>reservation-client</module>
     </modules>
 
     <parent>

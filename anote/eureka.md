@@ -1,67 +1,33 @@
-client-side service discovery
-only "fixed point": 服务注册
-drawback: all clients must implement a certain logic to interact with the fixed point
-
-注意spring和spring-cloud的版本兼容问题
-
-
-components:
-    a service registry  (Eureka server)
-    a rest service which registers itself at the registry
-    a web-application consuming the rest service
-    
-    
-课程:
-    josh long 《building microservice with spring cloud》  "youtube"
-    
-## 
-[入门视频](https://www.youtube.com/watch?v=aO3W-lYnw-o)
-
-http://cloudnativejava.io/
-    
-## why spring cloud
-
-
-## component
-#### configuration
-用来将config从application中移出来，放到中心化的存储中
-config server可以使用git, svn, filesystem, vault来存储config
-config client可以在启动的时候取到配置，并在配置发生变化的时候被通知到
-
-#### service discovery
+## service discovery
 
 netfilx eureka
 zookeeper
 consul
 
-#### circuit breakers
-netflix hystrix
+### 使用方式
+1. 首先需要运行服务注册中心，可参考eureka-service服务。在主类上添加@EnableEurekaServer，并添加相应application.properties属性
 
-#### routing and messaging
-routing and load balancing
-    netflix ribbon and open feign
-messaging:
-    rabbitmq or kafka
+2. 业务服务需要配置客户端，引入spring-cloud-starter-netflix-eureka-client，并在主类上启用@EnableDiscoveryClient
 
-#### api gateway
-netflix zuul
-    利用服务发现和负载均衡
+3. 在客户端还需要配置 eureka.client.serviceUrl.defaultZone
 
-spring cloud gateway
+4. 去到服务注册中心的web页面检查是否服务已经注册成功。
 
-#### tracing
-spring cloud sleuth and zipkin
+5. 服务消费者也需要引入引入spring-cloud-starter-netflix-eureka-client，并在主类上启用@EnableDiscoveryClient
 
-#### CI pipelines and testing
-Spring cloud contact
+6. 消费者在消费时不再需要知道服务的ip和端口，只需要知道服务的名称即可
 
-#### other
-bus, stream, data and task, aws...
+### 高可用注册中心
+一组相互注册的双节点服务注册中心
+
+### 服务续约
+在注册完服务之后，服务提供者会维护一个心跳到EurekaServer，以防止被从服务列表中排除出去。
+eureka.instance.lease-renewal-interval-in-seconds=30    服务续约任务的间隔时间
+eureka.ins七ance.lease-expiration-duration-in-seconds=90   定义服务失效的时间
 
 
-## spring cloud
-spring cloud eureka, configserver, zipkin
+### eureka的基础架构
 
+### eureka的服务治理机制
 
-
-    
+### eureka的配置

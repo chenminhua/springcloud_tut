@@ -1,5 +1,6 @@
 package com.chenminhua.reservation;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ import java.util.stream.Stream;
 @SpringBootApplication
 @EnableDiscoveryClient
 public class ReservationApp {
+
     @Bean
     CommandLineRunner commandLineRunner(ReservationRepository reservationRepository) {
         return strings -> {
